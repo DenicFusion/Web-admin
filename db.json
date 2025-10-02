@@ -1,0 +1,7 @@
+{
+  "groupName": "My WhatsApp Group",
+  "groupLink": "https://chat.whatsapp.com/example",
+  "status": "open",
+  "membersCount": 10,
+  "maxMembers": 100
+}

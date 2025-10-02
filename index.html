@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Earn from Social Media</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://i.ibb.co/KxPZmcvv/Untitled-design-20250718-115206-0000.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+    }
+    .logo {
+      width: 120px;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+      background: rgba(0, 0, 0, 0.6);
+      max-width: 800px;
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+    h1 { font-size: 32px; margin-bottom: 15px; }
+    .timer { font-size: 24px; margin: 10px 0; color: #ffdd57; }
+    .content {
+      padding: 40px;
+      max-width: 600px;
+      background: rgba(0, 0, 0, 0.6);
+      margin: 40px auto;
+      border-radius: 10px;
+    }
+    button {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover { background-color: #1ea55e; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.ibb.co/4wcxCkjV/23a8cc6a4933f22ba7c4740a9be7c3373f031124-md-WBW.png" alt="Logo" class="logo">
+  </header>
+
+  <div class="hero">
+    <h1 id="groupName">Turn Your Social Media Activities into Paydays</h1>
+    <p>Make ₦50,000 – ₦100,000 weekly just by using your social media.</p>
+    <p>No experience needed. No hidden fees. Just hit play and earn.</p>
+    <div class="timer" id="countdown">00:47:07</div>
+    <a id="groupLink" href="#" target="_blank">
+      <button>Join The Group here</button>
+    </a>
+    <p id="statusText"><em>Only the first 50 People to click the link will have access</em></p>
+  </div>
+
+  <div style="margin-top:20px;">
+    <img src="https://i.ibb.co/LhY8TtJg/IMG-20250728-WA0000.jpg" alt="Opportunity Preview" style="max-width:100%; border-radius:10px;">
+  </div>
+
+  <div class="content">
+    <h2>DO NOT JOIN THIS CLASS IF:</h2>
+    <ul>
+      <li>You are someone who does not like taking action</li>
+      <li>You are not ready to invest in yourself financially</li>
+      <li>You will not be able to attend the class</li>
+    </ul>
+    <p><strong>IF YOU ARE DIFFERENT FROM THE PERSON ABOVE, THEN DON'T MISS THIS OPPORTUNITY</strong></p>
+    <a id="groupLink2" href="#" target="_blank">
+      <button>Join The Group here</button>
+    </a>
+  </div>
+
+  <script>
+    async function loadGroup() {
+      try {
+        const res = await fetch("/group");
+        const data = await res.json();
+        document.getElementById("groupName").textContent = data.groupName;
+        document.getElementById("groupLink").href = data.groupLink;
+        document.getElementById("groupLink2").href = data.groupLink;
+        document.getElementById("statusText").innerHTML = `<em>Status: ${data.status} (${data.membersCount}/${data.maxMembers})</em>`;
+      } catch (e) {
+        console.error("Failed to load group:", e);
+      }
+    }
+
+    function startTimer(duration, display) {
+      let timer = duration, minutes, seconds;
+      setInterval(() => {
+        minutes = Math.floor(timer / 60);
+        seconds = timer % 60;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) timer = duration;
+      }, 1000);
+    }
+
+    window.onload = function () {
+      const duration = 27 * 60 + 7;
+      startTimer(duration, document.getElementById("countdown"));
+      loadGroup();
+    };
+  </script>
+
+  <footer style="text-align:center; padding:20px; color:#ccc; font-size:14px;">
+    <strong>&copy; Ethereal 2025</strong>
+  </footer>
+</body>
+</html>
